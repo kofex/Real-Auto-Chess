@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07ddda42f2d432ea524568fa6da9b70, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  _areaSettings:
+    _width: 8
+    _height: 6
+    _straitCost: 10
+    _diagonalCost: 10
+    _nodeHalfSize: {x: 0.5, y: 0.5}
+    _spawnInxRange: {x: 0, y: 2}
+    _tileColors:
+    - {r: 1, g: 1, b: 1, a: 1}
+    - {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+  _unitSettings:
+    _health: 100
+    _radius: 0.25
+    _damage: 10
+    _speed: 1
+  _teamSettings:
+    _teamColors:
+    - {r: 0.53626734, g: 0.9716981, b: 0.65009475, a: 1}
+    - {r: 0.504717, g: 0.91097844, b: 1, a: 1}
+    _unitsRange: {x: 2, y: 5}
+  _prefabs:
+  - {fileID: 3961435205575998135, guid: dd963743d187a6e4f9dd50f618056b3b, type: 3}
+  - {fileID: 1785251135454894308, guid: 9652341d884979448bb6a6fd41076613, type: 3}
+  - {fileID: 378497360710686217, guid: b43305167962e8a4ca1228c92982ce97, type: 3}
+  - {fileID: -3205272204607216455, guid: be8c5a4c21421ec4e8026dd0d1ac280b, type: 3}
+  - {fileID: 439632593477401026, guid: 93f60bf757c71e3438ab862d138c8a66, type: 3}
