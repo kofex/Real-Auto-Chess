@@ -1,6 +1,7 @@
+using Scripts.Tools;
 using UnityEngine;
 
-namespace Scripts.Tools
+namespace Scripts
 {
 	internal static class Debug
 	{
@@ -11,7 +12,7 @@ namespace Scripts.Tools
 		}
 
 		public static void Log(string message) => _logger.Log(message);
-		public static void Log(string message, LogType type) => _logger.Log(message, type);
-		public static void Log(string message, Object context, LogType type) => _logger.Log(message, context, type);
+		public static void Log(string message, Tools.LogType type) => _logger.Log(message, type);
+		public static void Log(string message, Object context, Tools.LogType type) => _logger.Log(message, context, type);
 	}
 }

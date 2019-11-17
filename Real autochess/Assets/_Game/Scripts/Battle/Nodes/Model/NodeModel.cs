@@ -9,14 +9,19 @@ namespace Scripts.Battle.Nodes.Model
 {
 	public class NodeModel : ModelBase, IModelWithVIew<NodeView>
 	{
+		public static int IncrId { get; private set; }
+		
 		public NodeView View { get; private set; }
 		public Vector2 Position { get; private set; }
 		public Color Color { get; private set; }
 		public int Id { get; private set; }
+		
+		
 
 
 		private new NodeModel InitModel()
 		{
+			Id = IncrId++;
 			return this;
 		}
 
@@ -24,13 +29,16 @@ namespace Scripts.Battle.Nodes.Model
 		{
 			Position = position;
 			Color = color;
+			InitModel();
 			return this;
 		}
 
 		public NodeView SetView(Component prefab, Transform parent = null)
 		{
 			View = Object.Instantiate(prefab, Position, Quaternion.identity, parent).GetComponent<NodeView>();
+			View.gameObject.name = $"Node {Id}";
 			View.SpriteRenderer.color = Color;
+			View.SetModel(this);
 			return View;
 		}
 	}

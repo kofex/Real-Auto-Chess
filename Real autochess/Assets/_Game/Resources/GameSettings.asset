@@ -16,7 +16,7 @@ MonoBehaviour:
     _width: 8
     _height: 6
     _straitCost: 10
-    _diagonalCost: 10
+    _diagonalCost: 11
     _nodeHalfSize: {x: 0.5, y: 0.5}
     _spawnInxRange: {x: 0, y: 2}
     _tileColors:
@@ -31,7 +31,7 @@ MonoBehaviour:
     _teamColors:
     - {r: 0.53626734, g: 0.9716981, b: 0.65009475, a: 1}
     - {r: 0.504717, g: 0.91097844, b: 1, a: 1}
-    _unitsRange: {x: 2, y: 5}
+    _unitsRange: {x: 1, y: 1}
   _prefabs:
   - {fileID: 3961435205575998135, guid: dd963743d187a6e4f9dd50f618056b3b, type: 3}
   - {fileID: 1785251135454894308, guid: 9652341d884979448bb6a6fd41076613, type: 3}

@@ -2,7 +2,7 @@ using System;
 using Scripts.Core.Interfaces;
 using Scripts.Core.Model.Base;
 
-namespace Scripts.Battle.Model
+namespace Scripts.Battle.Team.Model
 {
 	public class TeamsModelBase : ModelBase, IUpdatable, IRestartable
 	{

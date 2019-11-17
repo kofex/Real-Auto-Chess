@@ -1,8 +1,8 @@
 using System;
+using Scripts.Battle.Nodes.Model;
 using Scripts.Battle.Units.View;
 using Scripts.Core.Interfaces;
 using UnityEngine;
-using Debug = Scripts.Tools.Debug;
 using LogType = Scripts.Tools.LogType;
 using Object = UnityEngine.Object;
 
@@ -19,6 +19,9 @@ namespace Scripts.Battle.Units.Model
 		
 		private Color Color { get; set; }
 		private int UnitId { get; set; }
+		
+		private NodeModel _currentNode;
+		public NodeModel CurrentNode => _currentNode;
 		
 
 		public virtual UnitModel InitModel()
@@ -56,9 +59,17 @@ namespace Scripts.Battle.Units.Model
 			Debug.Log($"Check is dead base call [not implemented]", LogType.MissCall);
 			return false;
 		}
+		
+		public void SetCurrentNode(NodeModel currentNode)
+		{
+			_currentNode = currentNode;
+		}
 
 		public void SetDefault()
 		{
+			_currentNode = null;
+			ID = 0;
+			UnitId = 0;
 		}
 
 		public virtual void Restart()

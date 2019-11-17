@@ -6,14 +6,13 @@ using Scripts.Core;
 using Scripts.Core.Model;
 using Scripts.Tools;
 using Scripts.UI.Model;
-using Debug = Scripts.Tools.Debug;
 using LogType = Scripts.Tools.LogType;
 
-namespace Scripts.Battle.Model
+namespace Scripts.Battle.Team.Model
 {
 	public class TeamsModel<TUnit> : TeamsModelBase where TUnit : UnitModel, new()
 	{
-		private List<Team<TUnit>> Teams { get; } = new List<Team<TUnit>>();
+		protected List<Team<TUnit>> Teams { get; } = new List<Team<TUnit>>();
 		public int MaxUnits { get; private set; }
 		
 		private Team<TUnit> _theVictoriousTeam;
@@ -22,7 +21,7 @@ namespace Scripts.Battle.Model
 		private int _unitsGot;
 		private bool _canMove;
 
-		public new TeamsModel<TUnit> InitModel()
+		protected new TeamsModel<TUnit> InitModel()
 		{
 			_gameSettings = GameCore.GetModel<SettingsModel>();
 
@@ -48,6 +47,7 @@ namespace Scripts.Battle.Model
 		private void PrepareUnits(Team<TUnit> team)
 		{
 			var unitCont = _gameSettings.Settings.TeamSettings.UnitsRange.RandomValue();
+			
 			for (var i = 0; i < unitCont; i++)
 				team.TryAddUnit(CreateModel<TUnit>().InitModel() as TUnit);
 
@@ -64,7 +64,7 @@ namespace Scripts.Battle.Model
 			return Teams[teamInx].GetNextUnit();;
 		}
 
-		private int GetTeamIndex(int totalUnitInx) => totalUnitInx > Teams[0].Units.Count ? 1 : 0;
+		private int GetTeamIndex(int totalUnitInx) => totalUnitInx >= Teams[0].Units.Count ? 1 : 0;
 
 		public override void Update(float dt)
 		{

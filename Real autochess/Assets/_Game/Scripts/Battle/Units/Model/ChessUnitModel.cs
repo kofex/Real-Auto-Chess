@@ -1,3 +1,4 @@
+using Scripts.Battle.Nodes.Model;
 using Scripts.Battle.Units.View;
 using Scripts.Core;
 using Scripts.Core.Model;
@@ -7,6 +8,8 @@ namespace Scripts.Battle.Units.Model
 {
 	public class ChessUnitModel : UnitModel
 	{
+		public new PathNodeModel CurrentNode => base.CurrentNode as PathNodeModel;  
+			
 		public override UnitModel InitModel()
 		{
 			base.InitModel();

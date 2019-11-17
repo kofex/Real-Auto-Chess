@@ -2,6 +2,9 @@ using System;
 using Scripts.Battle.Area.Model;
 using Scripts.Battle.Camera.Model;
 using Scripts.Battle.Components;
+using Scripts.Battle.Pathfinding.Model;
+using Scripts.Battle.Team;
+using Scripts.Battle.Team.Model;
 using Scripts.Battle.Units.Model;
 using Scripts.Battle.Units.View;
 using Scripts.Components;
@@ -24,7 +27,8 @@ namespace Scripts.Battle.Model
 		public SingletonModelsContainer BattleSingletons { get; } = new SingletonModelsContainer();
 		
 		private PathAreaModel _areaModel;
-		private TeamsModel<ChessUnitModel> _teamsModel;
+		private ChessTeamModel _teamsModel;
+		private PathfindingModel _pathfindingModel;
 		private UnitView _unitPrefab;
 		private IUpdatable[] _updatableModels;
 		private bool _isSpawned;
@@ -37,7 +41,10 @@ namespace Scripts.Battle.Model
 			_areaModel = BattleSingletons.TryAddSingletonModel(CreateModel<PathAreaModel>())
 				.InitModel();
 			
-			_teamsModel = BattleSingletons.TryAddSingletonModel(CreateModel<TeamsModel<ChessUnitModel>>())
+			_teamsModel = BattleSingletons.TryAddSingletonModel(CreateModel<ChessTeamModel>())
+				.InitModel();
+
+			_pathfindingModel = BattleSingletons.TryAddSingletonModel(CreateModel<PathfindingModel>())
 				.InitModel();
 
 			BattleSingletons.TryAddSingletonModel(CreateModel<CameraModel>())
@@ -59,7 +66,6 @@ namespace Scripts.Battle.Model
 			PopUpModel.NewButtonClick += Restart;
 
 			_unitPrefab = settings.GetPefab<UnitView>();
-			
 			return this;
 		}
 
@@ -71,6 +77,7 @@ namespace Scripts.Battle.Model
 			if (!_isSpawned)
 				return;
 			
+			
 			foreach (var model in _updatableModels)
 			{
 				model.Update((dt));
@@ -81,12 +88,16 @@ namespace Scripts.Battle.Model
 		public void SpawnUnitOnField()
 		{
 			var count = _teamsModel.MaxUnits;
-			for (var i = 0; i < count; i++)
+			for (var i = 0; i <= count; i++) // <= для того чтобы сработал триггер в GetNextUnit
 				_areaModel.SpawnUnit(_teamsModel.GetNextUnit(out var teamInx), _unitPrefab, teamInx);
 			
 		}
 
-		private void OnSpawnComplete() => _isSpawned = true;
+		private void OnSpawnComplete()
+		{
+			_isSpawned = true;
+			_pathfindingModel.GetPathForTeam(_teamsModel.GetTeamUnits(0),_teamsModel.GetTeamUnits(1));
+		}
 
 		public void Restart()
 		{
